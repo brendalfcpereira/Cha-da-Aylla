@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chá da Aylla</title>
+    <style>
+        :root {
+            --rosa-pastel: #ffd1dc;
+            --rosa-escuro: #ffb6c1;
+            --amarelo-pastel: #fdf5c9;
+            --xadrez-linha: rgba(255, 182, 193, 0.35); /* Transparência para o xadrez */
+            --cor-texto: #6b5b5d;
+            --fundo-card: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fffafb;
+            /* Padrão Xadrez Rosa */
+            background-image: 
+              linear-gradient(var(--xadrez-linha) 2px, transparent 2px),
+              linear-gradient(90deg, var(--xadrez-linha) 2px, transparent 2px);
+            background-size: 30px 30px;
+            
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: var(--amarelo-pastel);
+            padding: 2rem 1rem;
+            color: var(--cor-texto);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-bottom: 5px dashed var(--rosa-escuro);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-family: 'Georgia', serif;
+            color: #5a4b4d;
+        }
+
+        .decoracao {
+            font-size: 1.5rem;
+            margin: 10px 0 0 0;
+            letter-spacing: 5px;
+        }
+
+        main {
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .upload-section {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--fundo-card);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 2px solid var(--rosa-pastel);
+        }
+
+        .upload-section p {
+            margin-top: 0; 
+            margin-bottom: 20px; 
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .camera-btn {
+            display: inline-block;
+            background-color: var(--rosa-pastel);
+            color: #5a4b4d;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.2s;
+            border: 2px solid var(--rosa-escuro);
+        }
+
+        .camera-btn:hover {
+            background-color: var(--rosa-escuro);
+        }
+
+        .camera-btn:active {
+            transform: scale(0.95);
+        }
+
+        #status-mensagem {
+            margin-top: 15px;
+            font-weight: bold;
+            height: 20px;
+        }
+
+        .gallery-section {
+            background: var(--fundo-card);
+            padding: 2rem 1rem;
+            border-radius: 20px;
+            border: 2px solid var(--amarelo-pastel);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .gallery-section h2 {
+            color: var(--cor-texto);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease-in-out;
+            border: 4px solid white; /* Moldurazinha branca para as fotos */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Chá da Aylla</h1>
+        <p class="decoracao">🎀 🌼 🎀 🌼 🎀</p>
+    </header>
+
+    <main>
+        <section class="upload-section">
+            <p>
+                Ajude a registrar esse momento especial!<br> 
+                Tire uma foto ou escolha da sua galeria para o nosso book.
+            </p>
+            <label for="camera-input" class="camera-btn">
+                📸 Tirar Foto
+            </label>
+            <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
+            <div id="status-mensagem"></div>
+        </section>
+
+        <section class="gallery-section">
+            <h2>🌼 Mural da Aylla 🌼</h2>
+            <div id="gallery" class="gallery">
+                <!-- As fotos recém-tiradas aparecerão aqui -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // === PREENCHA COM SEUS DADOS DO CLOUDINARY ===
+        const CLOUD_NAME = 'COLOQUE_SEU_CLOUD_NAME_AQUI'; 
+        const UPLOAD_PRESET = 'COLOQUE_SEU_UPLOAD_PRESET_AQUI';
+        // =============================================
+
+        const cameraInput = document.getElementById('camera-input');
+        const gallery = document.getElementById('gallery');
+        const statusMensagem = document.getElementById('status-mensagem');
+
+        cameraInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            
+            if (file) {
+                statusMensagem.textContent = "Enviando foto para o mural... 🎀";
+                statusMensagem.style.color = "#d988a1";
+
+                // Mostra a foto na tela imediatamente
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    gallery.prepend(imgElement);
+                }
+                reader.readAsDataURL(file);
+
+                // Envia para a nuvem
+                enviarParaCloudinary(file);
+            }
+        });
+
+        function enviarParaCloudinary(file) {
+            const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+            const formData = new FormData();
+            
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.secure_url) {
+                    statusMensagem.textContent = "Foto salva com sucesso! 🌼";
+                    statusMensagem.style.color = "#8b9dc3";
+                    setTimeout(() => { statusMensagem.textContent = ""; }, 3000);
+                } else {
+                    throw new Error('Erro ao gerar URL');
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                statusMensagem.textContent = "Erro ao salvar na nuvem. 😔";
+                statusMensagem.style.color = "#f44336";
+            });
+        }
+    </script>
+</body>
+</html>
