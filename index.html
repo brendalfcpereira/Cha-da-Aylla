@@ -148,7 +148,18 @@
         
         .pix-box { background-color: var(--rosa-fundo); border-radius: 15px; padding: 20px; margin-top: 20px; }
         .pix-box p { margin: 5px 0; }
-        
+
+        /* Estilo para o Laço na borda */
+        .laco-borda {
+            position: absolute;
+            top: -50px; /* Puxa o laço para cima, fazendo ele ficar na borda */
+            left: 50%;
+            transform: translateX(-50%); /* Garante que fique perfeitamente centralizado */
+            width: 400px; /* Tamanho bem maior! Se quiser maior, mude para 500px */
+            max-width: 100%; /* Impede que quebre a tela em celulares pequenos */
+            pointer-events: none; /* Garante que o laço não bloqueie cliques na tela */
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
@@ -162,17 +173,30 @@
     </nav>
 
     <main>
-        <section id="boas-vindas" class="card-section">
-            <img src="laco-grande.png" alt="Laço decorativo" style="width: 180px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;">
+        <!-- SEÇÃO 1: Boas-vindas e Contagem -->
+        <!-- Note o margin-top e padding-top para abrir espaço para o laço gigante -->
+        <section id="boas-vindas" class="card-section" style="margin-top: 60px; padding-top: 100px;">
+            
+            <!-- Aqui entra a sua imagem PNG -->
+            <!-- Substitua 'laço grande.png' pelo nome exato do seu arquivo -->
+            <img src="laco-grande.png" alt="Laço decorativo" class="laco-borda">
+            
             <h1>A doce espera da Aylla</h1>
+            
             <p class="texto-destaque">
                 Você é uma pessoa muito especial para a nossa família! Dividir a alegria da chegada da nossa princesinha com você faz esse momento ser ainda mais mágico e inesquecível.
             </p>
+
+            <!-- Acompanhamento da Gestação -->
             <div class="gestacao-box">
                 <h3>Estamos na 28ª Semana!</h3>
                 <p style="font-size: 0.9rem; margin: 0;">A Aylla já tem o tamanho de uma berinjela 🍆</p>
-                <div class="barra-fundo"><div class="barra-progresso"></div></div>
+                <div class="barra-fundo">
+                    <div class="barra-progresso"></div>
+                </div>
             </div>
+
+            <!-- Contagem Regressiva para a Festa -->
             <div style="margin-top: 30px;">
                 <p class="titulo-cursivo" style="font-size: 2rem;">Contagem regressiva para o nosso encontro:</p>
                 <div class="countdown" id="relogio">
