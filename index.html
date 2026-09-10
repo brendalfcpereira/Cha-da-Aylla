@@ -17,23 +17,19 @@
         }
 
         body {
-    font-family: 'Nunito', sans-serif;
-    background-color: var(--rosa-fundo); /* Fica como cor de segurança */
-    
-    /* AQUI ENTRA A SUA IMAGEM */
-    background-image: url('meu-fundo.jpg'); 
-    
-    background-size: cover; /* Faz a imagem preencher a tela inteira do celular/PC */
-    background-position: center; /* Mantém a imagem sempre centralizada */
-    background-attachment: fixed; /* Opcional: Faz o fundo ficar parado enquanto a pessoa rola a página para baixo */
-    background-repeat: no-repeat; /* Impede que a imagem fique se repetindo como um mosaico */
-    
-    color: var(--cinza-texto);
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    scroll-behavior: smooth;
-}
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--rosa-fundo);
+            background-image: url('meu-fundo.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--cinza-texto);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            scroll-behavior: smooth;
+        }
 
         nav {
             background-color: rgba(255, 255, 255, 0.95);
@@ -65,7 +61,7 @@
         }
 
         main {
-            padding: 3rem 1rem 2rem 1rem; /* Dei mais espaço em cima por conta do laço */
+            padding: 3rem 1rem 2rem 1rem;
             max-width: 750px;
             margin: 0 auto;
         }
@@ -77,36 +73,22 @@
             border-radius: 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             border: 6px dotted var(--rosa-botao);
-            margin-bottom: 3.5rem; /* Mais espaço entre os cartões */
-            
-            /* A mágica acontece aqui: isso prende o laço na moldura! */
+            margin-bottom: 3.5rem;
             position: relative; 
         }
 
         /* --- O LAÇO NA BORDA DA MOLDURA (Padrão para Celular) --- */
         .laco-borda {
             position: absolute;
-            top: -95px; /* Ajustado para a proporção do celular */
+            top: -95px;
             left: -10px; 
-            width: calc(100% + 20px); /* Aumenta só um pouquinho a largura para abraçar as bordas */
+            width: calc(100% + 20px);
             pointer-events: none; 
             z-index: 10;
         }
 
         #boas-vindas {
-            padding-top: 70px; /* Espaço ideal no celular para o laço não tampar o título */
-        }
-
-        /* Ajustes do laço especificamente para telas de computador */
-        @media (min-width: 768px) {
-            .laco-borda {
-                top: -130px; /* Sobe bem no computador */
-                left: -140px; /* Alarga para as laterais no computador */
-                width: calc(100% + 280px); /* Tamanho perfeito para telas grandes */
-            }
-            #boas-vindas {
-                padding-top: 220px !important; /* Empurra o texto para baixo no computador */
-            }
+            padding-top: 70px;
         }
 
         h1, h2, .titulo-cursivo {
@@ -150,6 +132,7 @@
             width: 70%; height: 100%; background-color: var(--rosa-texto);
             background-image: linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
             background-size: 20px 20px;
+            transition: width 1s ease-in-out;
         }
 
         .countdown {
@@ -179,16 +162,17 @@
         .pix-box { background-color: var(--rosa-fundo); border-radius: 15px; padding: 20px; margin-top: 20px; }
         .pix-box p { margin: 5px 0; }
 
-/* Ajustes do laço especificamente para telas de computador */
+        /* Ajustes do laço e espaçamento especificamente para telas de computador */
         @media (min-width: 768px) {
             .laco-borda {
-                top: -200px; /* Sobe o laço para alinhar o nó perfeitamente com a borda tracejada */
+                top: -200px;
+                left: -140px;
+                width: calc(100% + 280px);
             }
             #boas-vindas {
-                padding-top: 200px !important; /* Empurra o texto para baixo, livrando o título das fitas */
+                padding-top: 200px !important;
             }
         }
-        
     </style>
 </head>
 <body>
@@ -201,21 +185,23 @@
     </nav>
 
     <main>
-        <!-- Aumentei o padding-top para o nó do laço não cobrir a palavra "A doce espera..." -->
         <section id="boas-vindas" class="card-section">
-            
-            <!-- A SUA IMAGEM ENTRA AQUI! -->
             <img src="laco-grande.png" alt="Laço" class="laco-borda">
             
             <h1>A doce espera da Aylla</h1>
             <p class="texto-destaque">
                 Você é uma pessoa muito especial para a nossa família! Dividir a alegria da chegada da nossa princesinha com você faz esse momento ser ainda mais mágico e inesquecível.
             </p>
+
+            <!-- Caixa de Gestação Automatizada por DPP -->
             <div class="gestacao-box">
-                <h3>Estamos na 28ª Semana!</h3>
-                <p style="font-size: 0.9rem; margin: 0;">A Aylla já tem o tamanho de uma berinjela 🍆</p>
-                <div class="barra-fundo"><div class="barra-progresso"></div></div>
+                <h3 id="texto-semana">Calculando semanas...</h3>
+                <p id="texto-tamanho" style="font-size: 0.95rem; margin: 0;"></p>
+                <div class="barra-fundo">
+                    <div id="barra-progresso-id" class="barra-progresso"></div>
+                </div>
             </div>
+
             <div style="margin-top: 30px;">
                 <p class="titulo-cursivo" style="font-size: 2rem;">Contagem regressiva para o nosso encontro:</p>
                 <div class="countdown" id="relogio">
@@ -226,8 +212,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Se quiser colocar o laço nos outros cartões também, basta copiar e colar a linha do <img src...> logo abaixo da abertura da tag <section> de cada um! -->
 
         <section id="convite" class="card-section">
             <h2>O Convite</h2>
@@ -262,6 +246,85 @@
     </main>
 
     <script>
+        // === AUTOMAÇÃO DA GESTAÇÃO BASEADA NA DPP (Data Provável do Parto) ===
+        // Altere abaixo para a DPP real da Aylla no formato "AAAA-MM-DD"
+        const dataDPP = new Date("2027-01-16"); 
+
+        function atualizarGestacao() {
+            const hoje = new Date();
+            const diffTempo = dataDPP - hoje;
+            const diasRestantes = Math.ceil(diffTempo / (1000 * 60 * 60 * 24));
+            
+            // 280 dias é o total estimado de uma gestação (40 semanas)
+            const diasPassados = 280 - diasRestantes;
+            let semanaAtual = Math.ceil(diasPassados / 7);
+
+            if (semanaAtual < 1) semanaAtual = 1;
+            if (semanaAtual > 40) semanaAtual = 40;
+
+            // Tabela de tamanhos baseada nas semanas de gestação
+            const tamanhos = {
+                1: "uma semente de papoula 🌱",
+                2: "uma semente de papoula 🌱",
+                3: "um grão de gergelim 🌾",
+                4: "uma semente de papoula 🌱",
+                5: "um grão de laranja 🍊",
+                6: "um grão de lentilha 🫘",
+                7: "um mirtilo 🫐",
+                8: "uma framboesa 🍇",
+                9: "uma uva 🍇",
+                10: "um figo 🪷",
+                11: "um limão tahiti 🍋",
+                12: "um maracujá 🟡",
+                13: "um pêssego 🍑",
+                14: "um limão siciliano 🍋",
+                15: "uma maçã 🍎",
+                16: "um abacate 🥑",
+                17: "uma manga 🥭",
+                18: "uma alcachofra 🪷",
+                19: "um tomatinho 🍅",
+                20: "uma banana 🍌",
+                21: "uma cenoura grande 🥕",
+                22: "uma espiga de milho 🌽",
+                23: "uma manga grande 🥭",
+                24: "uma espiga de milho 🌽",
+                25: "uma couve-flor 🥦",
+                26: "uma alface americana 🥬",
+                27: "um repolho 🥬",
+                28: "uma berinjela 🍆",
+                29: "uma abóbora pequena 🎃",
+                30: "um repolho grande 🥬",
+                31: "um coco 🥥",
+                32: "uma jaca pequena 🍈",
+                33: "um abacaxi 🍍",
+                34: "um melão 🍈",
+                35: "um coco verde 🥥",
+                36: "um pé de alface grande 🥬",
+                37: "uma acelga 🥬",
+                38: "uma abóbora japonesa 🎃",
+                39: "uma melancia pequena 🍉",
+                40: "uma melancia inteira 🍉"
+            };
+
+            const tamanhoTexto = tamanhos[semanaAtual] || "um pacotinho de amor 👶";
+
+            // Atualiza os textos na tela automaticamente
+            document.getElementById("texto-semana").innerText = `Estamos na ${semanaAtual}ª Semana!`;
+            document.getElementById("texto-tamanho").innerText = `A Aylla já tem o tamanho de ${tamanhoTexto}`;
+
+            // Calcula a largura da barra de progresso (40 semanas = 100%)
+            let porcentagem = (semanaAtual / 40) * 100;
+            if (porcentagem > 100) porcentagem = 100;
+            if (porcentagem < 0) porcentagem = 0;
+
+            document.getElementById("barra-progresso-id").style.width = porcentagem + "%";
+        }
+
+        atualizarGestacao();
+    </script>
+
+    <script>
+        // === CONTAGEM REGRESSIVA PARA A FESTA ===
         const dataDaFesta = new Date("Nov 22, 2026 14:00:00").getTime();
         const x = setInterval(function() {
             const agora = new Date().getTime();
@@ -284,4 +347,3 @@
     </script>
 </body>
 </html>
-
