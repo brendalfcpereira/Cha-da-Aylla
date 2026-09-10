@@ -86,9 +86,9 @@
         /* --- O LAÇO NA BORDA DA MOLDURA --- */
         .laco-borda {
             position: absolute;
-            top: -95px; /* Define o quão para fora da borda superior ele fica */
-            left: -10px; /* Puxa um pouquinho para a esquerda para cobrir as bordas laterais */
-            width: calc(100% + 20px); /* Faz o laço abraçar toda a largura da moldura */
+            top: -100px; /* Define o quão para fora da borda superior ele fica */
+            left: -150px; /* Puxa um pouquinho para a esquerda para cobrir as bordas laterais */
+            width: calc(100% + 300px); /* Faz o laço abraçar toda a largura da moldura */
             pointer-events: none; /* Impede que o laço atrapalhe você de clicar nos textos */
             z-index: 10;
         }
@@ -162,6 +162,16 @@
         
         .pix-box { background-color: var(--rosa-fundo); border-radius: 15px; padding: 20px; margin-top: 20px; }
         .pix-box p { margin: 5px 0; }
+
+/* Ajustes do laço especificamente para telas de computador */
+        @media (min-width: 768px) {
+            .laco-borda {
+                top: -200px; /* Sobe o laço para alinhar o nó perfeitamente com a borda tracejada */
+            }
+            #boas-vindas {
+                padding-top: 200px !important; /* Empurra o texto para baixo, livrando o título das fitas */
+            }
+        }
         
     </style>
 </head>
@@ -176,7 +186,7 @@
 
     <main>
         <!-- Aumentei o padding-top para o nó do laço não cobrir a palavra "A doce espera..." -->
-        <section id="boas-vindas" class="card-section" style="padding-top: 100px;">
+        <section id="boas-vindas" class="card-section" style="padding-top:100px;">
             
             <!-- A SUA IMAGEM ENTRA AQUI! -->
             <img src="laco-grande.png" alt="Laço" class="laco-borda">
@@ -258,3 +268,4 @@
     </script>
 </body>
 </html>
+
