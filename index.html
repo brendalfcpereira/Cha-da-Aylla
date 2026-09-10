@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chá da Aylla</title>
-    <!-- Importando as fontes que combinam com o convite -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap');
 
@@ -20,7 +19,6 @@
         body {
             font-family: 'Nunito', sans-serif;
             background-color: var(--rosa-fundo);
-            /* Padrão Xadrez Rosa idêntico ao fundo do convite */
             background-image: 
               linear-gradient(var(--rosa-xadrez) 4px, transparent 4px),
               linear-gradient(90deg, var(--rosa-xadrez) 4px, transparent 4px);
@@ -32,9 +30,8 @@
             scroll-behavior: smooth;
         }
 
-        /* Menu de Navegação */
         nav {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 15px;
             position: sticky;
             top: 0;
@@ -68,7 +65,6 @@
             margin: 0 auto;
         }
 
-        /* Moldura estilo o convite rendado/pontilhado */
         .card-section {
             background: var(--fundo-card);
             padding: 3rem 2rem;
@@ -76,190 +72,136 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             border: 6px dotted var(--rosa-botao);
             margin-bottom: 2.5rem;
-            position: relative;
         }
 
-        .texto-topo {
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            color: var(--cinza-texto);
-            margin-bottom: 5px;
-        }
-
-        /* Fontes cursivas do convite */
-        h1, .titulo-cursivo {
+        h1, h2, .titulo-cursivo {
             font-family: 'Dancing Script', cursive;
             color: var(--rosa-texto);
             font-weight: 700;
             margin: 0;
         }
 
-        h1 {
-            font-size: 4.5rem;
-            line-height: 1;
-            margin-bottom: 15px;
-        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 15px; }
+        h2 { font-size: 3.2rem; margin-bottom: 1rem; }
 
-        .card-section h2 {
-            font-family: 'Dancing Script', cursive;
-            color: var(--rosa-texto);
-            font-size: 3rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-
-        .decoracao-flores {
-            font-size: 1.2rem;
-            letter-spacing: 5px;
-            margin-bottom: 25px;
-            color: #f7e092;
-        }
-
-        .texto-convite {
+        .texto-destaque {
             font-size: 1.15rem;
             line-height: 1.7;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: var(--cinza-texto);
         }
 
-        /* Grid de Data e Hora imitando o rodapé do convite */
+        .gestacao-box {
+            background-color: var(--rosa-fundo);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 2px dashed var(--rosa-botao);
+        }
+
+        .gestacao-box h3 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--rosa-texto);
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+        }
+
+        .barra-fundo {
+            width: 100%; height: 25px; background-color: white; border-radius: 15px;
+            border: 2px solid var(--rosa-botao); overflow: hidden; margin-top: 15px;
+        }
+
+        .barra-progresso {
+            width: 70%; height: 100%; background-color: var(--rosa-texto);
+            background-image: linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+            background-size: 20px 20px;
+        }
+
+        .countdown {
+            display: flex; justify-content: center; gap: 12px; margin-top: 20px;
+        }
+
+        .contador-item {
+            background: white; border: 2px solid var(--rosa-botao); border-radius: 15px;
+            width: 70px; padding: 10px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .contador-item span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--rosa-texto); }
+        .contador-item label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--cinza-texto); }
+
         .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid var(--rosa-xadrez);
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 30px;
+            padding-top: 20px; border-top: 2px solid var(--rosa-xadrez);
         }
 
         @media (max-width: 600px) {
-            .info-grid {
-                grid-template-columns: 1fr; /* Empilha no celular */
-                gap: 25px;
-            }
+            .info-grid { grid-template-columns: 1fr; gap: 25px; }
+            h1 { font-size: 3.5rem; }
         }
 
-        .info-item h3 {
-            font-family: 'Dancing Script', cursive;
-            color: var(--rosa-texto);
-            font-size: 2rem;
-            margin: 0 0 5px 0;
-            font-weight: normal;
-        }
-
-        .info-item p {
-            margin: 0;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        /* Botões */
-        .btn-acao {
-            display: inline-block;
-            background-color: var(--rosa-botao);
-            color: var(--cinza-texto);
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(227, 130, 149, 0.2);
-            transition: transform 0.2s, background-color 0.2s;
-            border: none;
-            text-decoration: none;
-            margin-top: 15px;
-        }
-
-        .btn-acao:hover { 
-            background-color: var(--rosa-texto); 
-            color: white;
-        }
-        .btn-acao:active { transform: scale(0.95); }
-
-        /* Área PIX */
-        .pix-box {
-            background-color: var(--rosa-fundo);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-        }
+        .info-item h3 { font-family: 'Dancing Script', cursive; color: var(--rosa-texto); font-size: 2rem; margin: 0 0 5px 0; font-weight: normal; }
+        
+        .pix-box { background-color: var(--rosa-fundo); border-radius: 15px; padding: 20px; margin-top: 20px; }
         .pix-box p { margin: 5px 0; }
-
-        /* Galeria */
-        #status-mensagem { margin-top: 15px; font-weight: bold; height: 20px; }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .gallery img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            animation: fadeIn 0.5s ease-in-out;
-            border: 4px solid white;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        
     </style>
 </head>
 <body>
 
-    <!-- Menu Superior -->
     <nav>
-        <a href="#inicio">O Convite</a>
+        <a href="#boas-vindas">Início</a>
+        <a href="#convite">O Convite</a>
         <a href="#presentes">Presentes</a>
-        <a href="#fotos">Mural de Fotos</a>
+        <!-- Este link agora manda para a nova página -->
+        <a href="fotos.html" style="background: var(--rosa-botao); color: var(--rosa-texto);">Mural de Fotos 📸</a>
     </nav>
 
     <main>
-        <!-- Seção 1: O Convite (Design idêntico à arte) -->
-        <section id="inicio" class="card-section">
-            <div style="font-size: 2.5rem; margin-bottom: 10px;">🎀</div>
-            
-            <p class="texto-topo">Você está convidado para o</p>
-            <h1>Chá da Aylla</h1>
-            
-            <div class="decoracao-flores">🌼 🌼 🌼 🌼 🌼</div>
-            
-            <p class="texto-convite">
-                Estamos preparando tudo com muito amor para a chegada da nossa pequena! 
-                Será um momento especial e cheio de carinho, e sua presença tornará esse dia ainda mais completo!
+        <section id="boas-vindas" class="card-section">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">🧸</div>
+            <h1>A doce espera da Aylla</h1>
+            <p class="texto-destaque">
+                Você é uma pessoa muito especial para a nossa família! Dividir a alegria da chegada da nossa princesinha com você faz esse momento ser ainda mais mágico e inesquecível.
             </p>
-
-            <div class="info-grid">
-                <div class="info-item">
-                    <h3>📅 Data</h3>
-                    <p>22 de Novembro<br>de 2026</p>
-                </div>
-                <div class="info-item" style="border-left: 2px solid var(--rosa-xadrez); border-right: 2px solid var(--rosa-xadrez);">
-                    <h3>⏰ Horário</h3>
-                    <p>Às 14h</p>
-                </div>
-                <div class="info-item">
-                    <h3>📍 Local</h3>
-                    <p>Centro comunitário<br>de Santos dumont</p>
-                </div>
+            <div class="gestacao-box">
+                <h3>Estamos na 28ª Semana!</h3>
+                <p style="font-size: 0.9rem; margin: 0;">A Aylla já tem o tamanho de uma berinjela 🍆</p>
+                <div class="barra-fundo"><div class="barra-progresso"></div></div>
             </div>
-
-            <div style="margin-top: 35px;">
-                <p class="titulo-cursivo" style="font-size: 2.2rem; margin-bottom: 15px;">Sua presença é muito importante para nós!</p>
-                <div style="font-size: 2rem;">💐 🧸</div>
+            <div style="margin-top: 30px;">
+                <p class="titulo-cursivo" style="font-size: 2rem;">Contagem regressiva para o nosso encontro:</p>
+                <div class="countdown" id="relogio">
+                    <div class="contador-item"><span id="dias">00</span><label>Dias</label></div>
+                    <div class="contador-item"><span id="horas">00</span><label>Horas</label></div>
+                    <div class="contador-item"><span id="minutos">00</span><label>Min</label></div>
+                    <div class="contador-item"><span id="segundos">00</span><label>Seg</label></div>
+                </div>
             </div>
         </section>
 
-        <!-- Seção 2: Lista de Presentes -->
+        <section id="convite" class="card-section">
+            <h2>O Convite</h2>
+            <div style="font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 20px; color: #f7e092;">🌼 🌼 🌼 🌼 🌼</div>
+            <p class="texto-destaque">
+                Estamos preparando tudo com muito amor para a chegada da nossa pequena! 
+                Será um momento especial e cheio de carinho.
+            </p>
+            <div class="info-grid">
+                <div class="info-item"><h3>📅 Data</h3><p>22 de Novembro<br>de 2026</p></div>
+                <div class="info-item" style="border-left: 2px solid var(--rosa-xadrez); border-right: 2px solid var(--rosa-xadrez);">
+                    <h3>⏰ Horário</h3><p>Às 14h</p>
+                </div>
+                <div class="info-item"><h3>📍 Local</h3><p>Centro comunitário<br>de Santos dumont</p></div>
+            </div>
+            <div style="margin-top: 35px;">
+                <p class="titulo-cursivo" style="font-size: 2.2rem;">Sua presença é muito importante para nós!</p>
+            </div>
+        </section>
+
         <section id="presentes" class="card-section">
             <h2>Operação Fralda</h2>
-            <p class="texto-convite">Sua presença é o nosso maior presente! 🌼<br>Mas, se quiser mimar a Aylla, preparamos algumas sugestões:</p>
+            <p class="texto-destaque">Sua presença é o nosso maior presente! 🌼<br>Mas, se quiser mimar a Aylla, preparamos algumas sugestões:</p>
             <p><strong>Fraldas (Tamanhos M e G) e Lenços Umedecidos</strong></p>
-            
             <div class="pix-box">
                 <p>🎀 <strong>Quer presentear com um PIX?</strong> 🎀</p>
                 <p>Fique à vontade para contribuir com qualquer valor para o enxoval!</p>
@@ -267,83 +209,28 @@
                 <p>Nome: [Nome da pessoa do PIX]</p>
             </div>
         </section>
-
-        <!-- Seção 3: Mural de Fotos -->
-        <section id="fotos" class="card-section">
-            <h2>Mural da Aylla</h2>
-            <p class="texto-convite">
-                Durante o chá, ajude a registrar cada momento especial!<br> 
-                Tire uma foto ou escolha da sua galeria para o nosso book.
-            </p>
-            
-            <label for="camera-input" class="btn-acao">
-                📸 Enviar Foto
-            </label>
-            <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
-            <div id="status-mensagem"></div>
-            
-            <div id="gallery" class="gallery">
-                <!-- As fotos recém-tiradas aparecerão aqui -->
-            </div>
-        </section>
     </main>
 
     <script>
-        // === PREENCHA COM SEUS DADOS DO CLOUDINARY ===
-        const CLOUD_NAME = 'COLOQUE_SEU_CLOUD_NAME_AQUI'; 
-        const UPLOAD_PRESET = 'COLOQUE_SEU_UPLOAD_PRESET_AQUI';
-        // =============================================
-
-        const cameraInput = document.getElementById('camera-input');
-        const gallery = document.getElementById('gallery');
-        const statusMensagem = document.getElementById('status-mensagem');
-
-        cameraInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
+        const dataDaFesta = new Date("Nov 22, 2026 14:00:00").getTime();
+        const x = setInterval(function() {
+            const agora = new Date().getTime();
+            const distancia = dataDaFesta - agora;
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
             
-            if (file) {
-                statusMensagem.textContent = "Enviando foto para o mural... 🎀";
-                statusMensagem.style.color = "var(--rosa-texto)";
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = e.target.result;
-                    gallery.prepend(imgElement);
-                }
-                reader.readAsDataURL(file);
-
-                enviarParaCloudinary(file);
+            document.getElementById("dias").innerHTML = dias < 10 ? "0" + dias : dias;
+            document.getElementById("horas").innerHTML = horas < 10 ? "0" + horas : horas;
+            document.getElementById("minutos").innerHTML = minutos < 10 ? "0" + minutos : minutos;
+            document.getElementById("segundos").innerHTML = segundos < 10 ? "0" + segundos : segundos;
+            
+            if (distancia < 0) {
+                clearInterval(x);
+                document.getElementById("relogio").innerHTML = "<p style='font-size: 1.5rem; color: #e38295; font-weight: bold;'>É hoje o grande dia! 🎉</p>";
             }
-        });
-
-        function enviarParaCloudinary(file) {
-            const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
-            const formData = new FormData();
-            
-            formData.append('file', file);
-            formData.append('upload_preset', UPLOAD_PRESET);
-
-            fetch(url, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.secure_url) {
-                    statusMensagem.textContent = "Foto salva com sucesso! 🌼";
-                    statusMensagem.style.color = "#8b9dc3";
-                    setTimeout(() => { statusMensagem.textContent = ""; }, 3000);
-                } else {
-                    throw new Error('Erro ao gerar URL');
-                }
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-                statusMensagem.textContent = "Erro ao salvar na nuvem. 😔";
-                statusMensagem.style.color = "#f44336";
-            });
-        }
+        }, 1000);
     </script>
 </body>
 </html>
