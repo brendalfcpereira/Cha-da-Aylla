@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural de Fotos - Aylla</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap');
+
+        :root {
+            --rosa-xadrez: #ffdae2;
+            --rosa-fundo: #fff3f5;
+            --rosa-texto: #e38295;
+            --cinza-texto: #8c7e80;
+            --rosa-botao: #ffd1dc;
+            --fundo-card: #ffffff;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--rosa-fundo);
+            background-image: 
+              linear-gradient(var(--rosa-xadrez) 4px, transparent 4px),
+              linear-gradient(90deg, var(--rosa-xadrez) 4px, transparent 4px);
+            background-size: 50px 50px;
+            color: var(--cinza-texto);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(227, 130, 149, 0.15);
+            border-bottom: 2px solid var(--rosa-xadrez);
+        }
+
+        nav a {
+            color: var(--cinza-texto);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: var(--rosa-botao);
+            color: var(--rosa-texto);
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background: var(--rosa-texto);
+            color: white;
+        }
+
+        main {
+            padding: 2rem 1rem;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .card-section {
+            background: var(--fundo-card);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 6px dotted var(--rosa-botao);
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--rosa-texto);
+            font-size: 3.2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .texto-destaque {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--cinza-texto);
+        }
+
+        .btn-acao {
+            display: inline-block;
+            background-color: var(--rosa-botao);
+            color: var(--cinza-texto);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(227, 130, 149, 0.2);
+            border: none;
+            margin-top: 15px;
+            transition: all 0.2s;
+        }
+        
+        .btn-acao:hover { background-color: var(--rosa-texto); color: white; }
+        
+        #status-mensagem { margin-top: 15px; font-weight: bold; height: 20px; }
+        
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 30px; }
+        .gallery img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">⬅ Voltar para o Convite</a>
+    </nav>
+
+    <main>
+        <section class="card-section">
+            <h2>Mural da Aylla</h2>
+            <div style="font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 20px; color: #f7e092;">🌼 🌼 🌼 🌼 🌼</div>
+            <p class="texto-destaque">
+                Esse é o nosso espaço de memórias! <br>
+                Tire uma foto agora mesmo ou escolha os melhores cliques da sua galeria.
+            </p>
+            
+            <label for="camera-input" class="btn-acao">
+                📸 Enviar Foto
+            </label>
+            <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
+            <div id="status-mensagem"></div>
+            
+            <div id="gallery" class="gallery">
+                <!-- As fotos enviadas aparecerão aqui na tela -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // === PREENCHA COM SEUS DADOS DO CLOUDINARY ===
+        const CLOUD_NAME = 'COLOQUE_SEU_CLOUD_NAME_AQUI'; 
+        const UPLOAD_PRESET = 'COLOQUE_SEU_UPLOAD_PRESET_AQUI';
+
+        const cameraInput = document.getElementById('camera-input');
+        const gallery = document.getElementById('gallery');
+        const statusMensagem = document.getElementById('status-mensagem');
+
+        cameraInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            
+            if (file) {
+                statusMensagem.textContent = "Enviando foto para o mural... 🎀";
+                statusMensagem.style.color = "var(--rosa-texto)";
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    gallery.prepend(imgElement); // Adiciona a foto no topo da galeria visual
+                }
+                reader.readAsDataURL(file);
+
+                enviarParaCloudinary(file);
+            }
+        });
+
+        function enviarParaCloudinary(file) {
+            const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+            const formData = new FormData();
+            
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.secure_url) {
+                    statusMensagem.textContent = "Foto salva com sucesso! 🌼";
+                    statusMensagem.style.color = "#8b9dc3";
+                    setTimeout(() => { statusMensagem.textContent = ""; }, 3000);
+                } else {
+                    throw new Error('Erro ao gerar URL');
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                statusMensagem.textContent = "Erro ao salvar na nuvem. 😔";
+                statusMensagem.style.color = "#f44336";
+            });
+        }
+    </script>
+</body>
+</html>
