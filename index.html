@@ -83,14 +83,30 @@
             position: relative; 
         }
 
-        /* --- O LAÇO NA BORDA DA MOLDURA --- */
+        /* --- O LAÇO NA BORDA DA MOLDURA (Padrão para Celular) --- */
         .laco-borda {
             position: absolute;
-            top: -100px; /* Define o quão para fora da borda superior ele fica */
-            left: -150px; /* Puxa um pouquinho para a esquerda para cobrir as bordas laterais */
-            width: calc(100% + 300px); /* Faz o laço abraçar toda a largura da moldura */
-            pointer-events: none; /* Impede que o laço atrapalhe você de clicar nos textos */
+            top: -40px; /* Ajustado para a proporção do celular */
+            left: -20px; 
+            width: calc(100% + 40px); /* Aumenta só um pouquinho a largura para abraçar as bordas */
+            pointer-events: none; 
             z-index: 10;
+        }
+
+        #boas-vindas {
+            padding-top: 70px; /* Espaço ideal no celular para o laço não tampar o título */
+        }
+
+        /* Ajustes do laço especificamente para telas de computador */
+        @media (min-width: 768px) {
+            .laco-borda {
+                top: -130px; /* Sobe bem no computador */
+                left: -140px; /* Alarga para as laterais no computador */
+                width: calc(100% + 280px); /* Tamanho perfeito para telas grandes */
+            }
+            #boas-vindas {
+                padding-top: 220px !important; /* Empurra o texto para baixo no computador */
+            }
         }
 
         h1, h2, .titulo-cursivo {
@@ -186,7 +202,7 @@
 
     <main>
         <!-- Aumentei o padding-top para o nó do laço não cobrir a palavra "A doce espera..." -->
-        <section id="boas-vindas" class="card-section" style="padding-top:100px;">
+        <section id="boas-vindas" class="card-section">
             
             <!-- A SUA IMAGEM ENTRA AQUI! -->
             <img src="laco-grande.png" alt="Laço" class="laco-borda">
