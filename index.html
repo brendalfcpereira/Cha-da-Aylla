@@ -4,134 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chá da Aylla</title>
+    <!-- Importando as fontes que combinam com o convite -->
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap');
+
         :root {
-            --rosa-pastel: #ffd1dc;
-            --rosa-escuro: #ffb6c1;
-            --amarelo-pastel: #fdf5c9;
-            --xadrez-linha: rgba(255, 182, 193, 0.35); /* Transparência para o xadrez */
-            --cor-texto: #6b5b5d;
-            --fundo-card: rgba(255, 255, 255, 0.95);
+            --rosa-xadrez: #ffdae2;
+            --rosa-fundo: #fff3f5;
+            --rosa-texto: #e38295;
+            --cinza-texto: #8c7e80;
+            --rosa-botao: #ffd1dc;
+            --fundo-card: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fffafb;
-            /* Padrão Xadrez Rosa */
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--rosa-fundo);
+            /* Padrão Xadrez Rosa idêntico ao fundo do convite */
             background-image: 
-              linear-gradient(var(--xadrez-linha) 2px, transparent 2px),
-              linear-gradient(90deg, var(--xadrez-linha) 2px, transparent 2px);
-            background-size: 30px 30px;
-            
-            color: var(--cor-texto);
+              linear-gradient(var(--rosa-xadrez) 4px, transparent 4px),
+              linear-gradient(90deg, var(--rosa-xadrez) 4px, transparent 4px);
+            background-size: 50px 50px;
+            color: var(--cinza-texto);
             margin: 0;
             padding: 0;
             text-align: center;
+            scroll-behavior: smooth;
         }
 
-        header {
-            background-color: var(--amarelo-pastel);
-            padding: 2rem 1rem;
-            color: var(--cor-texto);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-bottom: 5px dashed var(--rosa-escuro);
+        /* Menu de Navegação */
+        nav {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 15px rgba(227, 130, 149, 0.15);
+            border-bottom: 2px solid var(--rosa-xadrez);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            font-family: 'Georgia', serif;
-            color: #5a4b4d;
+        nav a {
+            color: var(--cinza-texto);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
         }
 
-        .decoracao {
-            font-size: 1.5rem;
-            margin: 10px 0 0 0;
-            letter-spacing: 5px;
+        nav a:hover {
+            background: var(--rosa-texto);
+            color: white;
         }
 
         main {
             padding: 2rem 1rem;
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
         }
 
-        .upload-section {
-            margin-bottom: 2rem;
-            padding: 2rem;
+        /* Moldura estilo o convite rendado/pontilhado */
+        .card-section {
             background: var(--fundo-card);
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 2px solid var(--rosa-pastel);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 6px dotted var(--rosa-botao);
+            margin-bottom: 2.5rem;
+            position: relative;
         }
 
-        .upload-section p {
-            margin-top: 0; 
-            margin-bottom: 20px; 
-            font-size: 1.1rem;
-            line-height: 1.5;
+        .texto-topo {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--cinza-texto);
+            margin-bottom: 5px;
         }
 
-        .camera-btn {
-            display: inline-block;
-            background-color: var(--rosa-pastel);
-            color: #5a4b4d;
-            padding: 15px 40px;
+        /* Fontes cursivas do convite */
+        h1, .titulo-cursivo {
+            font-family: 'Dancing Script', cursive;
+            color: var(--rosa-texto);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .card-section h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--rosa-texto);
+            font-size: 3rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .decoracao-flores {
             font-size: 1.2rem;
+            letter-spacing: 5px;
+            margin-bottom: 25px;
+            color: #f7e092;
+        }
+
+        .texto-convite {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: var(--cinza-texto);
+        }
+
+        /* Grid de Data e Hora imitando o rodapé do convite */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--rosa-xadrez);
+        }
+
+        @media (max-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr; /* Empilha no celular */
+                gap: 25px;
+            }
+        }
+
+        .info-item h3 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--rosa-texto);
+            font-size: 2rem;
+            margin: 0 0 5px 0;
+            font-weight: normal;
+        }
+
+        .info-item p {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Botões */
+        .btn-acao {
+            display: inline-block;
+            background-color: var(--rosa-botao);
+            color: var(--cinza-texto);
+            padding: 15px 40px;
+            font-size: 1.1rem;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(227, 130, 149, 0.2);
             transition: transform 0.2s, background-color 0.2s;
-            border: 2px solid var(--rosa-escuro);
-        }
-
-        .camera-btn:hover {
-            background-color: var(--rosa-escuro);
-        }
-
-        .camera-btn:active {
-            transform: scale(0.95);
-        }
-
-        #status-mensagem {
+            border: none;
+            text-decoration: none;
             margin-top: 15px;
-            font-weight: bold;
-            height: 20px;
         }
 
-        .gallery-section {
-            background: var(--fundo-card);
-            padding: 2rem 1rem;
-            border-radius: 20px;
-            border: 2px solid var(--amarelo-pastel);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .btn-acao:hover { 
+            background-color: var(--rosa-texto); 
+            color: white;
         }
+        .btn-acao:active { transform: scale(0.95); }
 
-        .gallery-section h2 {
-            color: var(--cor-texto);
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-family: 'Georgia', serif;
+        /* Área PIX */
+        .pix-box {
+            background-color: var(--rosa-fundo);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
         }
+        .pix-box p { margin: 5px 0; }
 
+        /* Galeria */
+        #status-mensagem { margin-top: 15px; font-weight: bold; height: 20px; }
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 15px;
+            margin-top: 20px;
         }
-
         .gallery img {
             width: 100%;
             height: 140px;
             object-fit: cover;
             border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             animation: fadeIn 0.5s ease-in-out;
-            border: 4px solid white; /* Moldurazinha branca para as fotos */
+            border: 4px solid white;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -140,26 +211,77 @@
 </head>
 <body>
 
-    <header>
-        <h1>Chá da Aylla</h1>
-        <p class="decoracao">🎀 🌼 🎀 🌼 🎀</p>
-    </header>
+    <!-- Menu Superior -->
+    <nav>
+        <a href="#inicio">O Convite</a>
+        <a href="#presentes">Presentes</a>
+        <a href="#fotos">Mural de Fotos</a>
+    </nav>
 
     <main>
-        <section class="upload-section">
-            <p>
-                Ajude a registrar esse momento especial!<br> 
+        <!-- Seção 1: O Convite (Design idêntico à arte) -->
+        <section id="inicio" class="card-section">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">🎀</div>
+            
+            <p class="texto-topo">Você está convidado para o</p>
+            <h1>Chá da Aylla</h1>
+            
+            <div class="decoracao-flores">🌼 🌼 🌼 🌼 🌼</div>
+            
+            <p class="texto-convite">
+                Estamos preparando tudo com muito amor para a chegada da nossa pequena! 
+                Será um momento especial e cheio de carinho, e sua presença tornará esse dia ainda mais completo!
+            </p>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>📅 Data</h3>
+                    <p>22 de Novembro<br>de 2026</p>
+                </div>
+                <div class="info-item" style="border-left: 2px solid var(--rosa-xadrez); border-right: 2px solid var(--rosa-xadrez);">
+                    <h3>⏰ Horário</h3>
+                    <p>Às 14h</p>
+                </div>
+                <div class="info-item">
+                    <h3>📍 Local</h3>
+                    <p>Centro comunitário<br>de Santos dumont</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 35px;">
+                <p class="titulo-cursivo" style="font-size: 2.2rem; margin-bottom: 15px;">Sua presença é muito importante para nós!</p>
+                <div style="font-size: 2rem;">💐 🧸</div>
+            </div>
+        </section>
+
+        <!-- Seção 2: Lista de Presentes -->
+        <section id="presentes" class="card-section">
+            <h2>Operação Fralda</h2>
+            <p class="texto-convite">Sua presença é o nosso maior presente! 🌼<br>Mas, se quiser mimar a Aylla, preparamos algumas sugestões:</p>
+            <p><strong>Fraldas (Tamanhos M e G) e Lenços Umedecidos</strong></p>
+            
+            <div class="pix-box">
+                <p>🎀 <strong>Quer presentear com um PIX?</strong> 🎀</p>
+                <p>Fique à vontade para contribuir com qualquer valor para o enxoval!</p>
+                <p style="margin-top: 15px;">Chave (Celular/CPF):<br><strong style="font-size: 1.2rem; color: var(--rosa-texto);">[Sua Chave PIX Aqui]</strong></p>
+                <p>Nome: [Nome da pessoa do PIX]</p>
+            </div>
+        </section>
+
+        <!-- Seção 3: Mural de Fotos -->
+        <section id="fotos" class="card-section">
+            <h2>Mural da Aylla</h2>
+            <p class="texto-convite">
+                Durante o chá, ajude a registrar cada momento especial!<br> 
                 Tire uma foto ou escolha da sua galeria para o nosso book.
             </p>
-            <label for="camera-input" class="camera-btn">
-                📸 Tirar Foto
+            
+            <label for="camera-input" class="btn-acao">
+                📸 Enviar Foto
             </label>
             <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
             <div id="status-mensagem"></div>
-        </section>
-
-        <section class="gallery-section">
-            <h2>🌼 Mural da Aylla 🌼</h2>
+            
             <div id="gallery" class="gallery">
                 <!-- As fotos recém-tiradas aparecerão aqui -->
             </div>
@@ -181,9 +303,8 @@
             
             if (file) {
                 statusMensagem.textContent = "Enviando foto para o mural... 🎀";
-                statusMensagem.style.color = "#d988a1";
+                statusMensagem.style.color = "var(--rosa-texto)";
 
-                // Mostra a foto na tela imediatamente
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const imgElement = document.createElement('img');
@@ -192,7 +313,6 @@
                 }
                 reader.readAsDataURL(file);
 
-                // Envia para a nuvem
                 enviarParaCloudinary(file);
             }
         });
